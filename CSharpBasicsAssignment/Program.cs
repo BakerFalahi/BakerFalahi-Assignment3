@@ -49,6 +49,8 @@ internal class Program
 
         o2.PrintSummary();
 
+        RunScopeAndOperatorsDemo();
+
     }
 
     static void RunTypesDemo()
@@ -157,5 +159,170 @@ internal class Program
         Console.WriteLine($"p2.X: {p2.X}");
         #endregion
     }
+
+    #region Scope & Operators
+    private static int sharedNumber = 50;
+
+
+    public static void RunScopeAndOperatorsDemo()
+    {
+        Console.WriteLine("=== PART D: Scope & Operators ===");
+
+        Console.WriteLine("\n--- D1: Scope ---");
+
+        ReadFieldFromFirstMethod();
+        ReadFieldFromSecondMethod();
+
+        MethodScopeDemo();
+        BlockScopeDemo();
+
+
+        Console.WriteLine("\n--- D2: Composite (Compound Assignment) Operators ---");
+
+        CompoundAssignmentDemo();
+
+
+        Console.WriteLine("\n--- D3: Bitwise Operators ---");
+
+        BitwiseOperatorsDemo();
+    }
+
+    static void ReadFieldFromFirstMethod()
+    {
+        Console.WriteLine(
+            $"First method reads sharedNumber: {sharedNumber}"
+        );
+    }
+
+
+    static void ReadFieldFromSecondMethod()
+    {
+        Console.WriteLine(
+            $"Second method reads sharedNumber: {sharedNumber}"
+        );
+    }
+
+
+    static void MethodScopeDemo()
+    {
+        int localNumber = 20;
+
+        Console.WriteLine(
+            $"Local variable inside MethodScopeDemo: {localNumber}"
+        );
+
+        // localNumber only exists inside this method.
+    }
+
+
+    static void BlockScopeDemo()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            int insideLoop = i * 10;
+
+            Console.WriteLine(
+                $"i = {i}, insideLoop = {insideLoop}"
+            );
+        }
+    }
+
+    static void CompoundAssignmentDemo()
+    {
+        int total = 100;
+
+        Console.WriteLine($"Starting total: {total}");
+
+        total += 20;
+        Console.WriteLine($"After += 20: {total}");
+
+        // Long form:
+        // total = total + 20;
+        // This is equivalent to:
+        // total += 20;
+
+        total -= 10;
+        Console.WriteLine($"After -= 10: {total}");
+
+        total *= 2;
+        Console.WriteLine($"After *= 2: {total}");
+
+        total /= 5;
+        Console.WriteLine($"After /= 5: {total}");
+
+        total %= 7;
+        Console.WriteLine($"After %= 7: {total}");
+    }
+
+    static void BitwiseOperatorsDemo()
+    {
+        int a = 12;
+        int b = 10;
+
+        Console.WriteLine($"a = {a}");
+        Console.WriteLine($"b = {b}");
+
+        // Decimal:
+        // a = 12
+        // b = 10
+
+        // Binary:
+        // a = 1100
+        // b = 1010
+
+
+        // Bitwise AND (&)
+        //
+        //   1100
+        // & 1010
+        // ------
+        //   1000
+        //
+        // 1000 binary = 8 decimal
+
+        int andResult = a & b;
+
+        Console.WriteLine($"a & b = {andResult}");
+
+
+        // Bitwise OR (|)
+        //
+        //   1100
+        // | 1010
+        // ------
+        //   1110
+        //
+        // 1110 binary = 14 decimal
+
+        int orResult = a | b;
+
+        Console.WriteLine($"a | b = {orResult}");
+
+
+        // Bitwise XOR (^)
+        //
+        //   1100
+        // ^ 1010
+        // ------
+        //   0110
+        //
+        // 0110 binary = 6 decimal
+
+        int xorResult = a ^ b;
+
+        Console.WriteLine($"a ^ b = {xorResult}");
+
+
+        // Practical difference:
+        // && is a logical operator that short-circuits:
+        // if the left operand is false, the right operand is not evaluated.
+        //
+        // & evaluates both operands even when the left operand is false.
+    }
+
+    #endregion
+
+
+
 }
 
